@@ -1,0 +1,73 @@
+<%- include('../partials/header', {title: blog ? 'Edit Post' : 'New Post', pageCSS:'admin'}) %>
+
+<div class="admin-body">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span>She Can Admin</span></div>
+    <ul class="sidebar-menu">
+      <li><a href="/admin">🏠 Dashboard</a></li>
+      <li><a href="/admin/applications">📋 Applications</a></li>
+      <li><a href="/admin/messages">💬 Messages</a></li>
+      <li><a href="/admin/blogs">📝 Blog Posts</a></li>
+      <li><a href="/admin/blogs/new" class="active">✏️ New Post</a></li>
+      <li><a href="/" target="_blank">🌐 View Site</a></li>
+      <li><a href="/admin/logout">🚪 Logout</a></li>
+    </ul>
+  </aside>
+
+  <main class="admin-content">
+    <div class="admin-header">
+      <h1><%= blog ? 'Edit Post' : 'New Blog Post' %></h1>
+      <p><%= blog ? 'Update your blog post.' : 'Create a new blog post for the She Can website.' %></p>
+    </div>
+
+    <div class="blog-form-wrap">
+      <form action="<%= blog ? '/admin/blogs/'+blog._id+'?_method=PUT' : '/admin/blogs' %>" method="POST" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Post Title *</label>
+            <input type="text" name="title" class="form-control" value="<%= blog ? blog.title : '' %>" placeholder="Enter blog title" required/>
+          </div>
+          <div class="form-group">
+            <label>Category *</label>
+            <select name="category" class="form-control">
+              <option <%= blog && blog.category==='General'?'selected':'' %>>General</option>
+              <option <%= blog && blog.category==='Education'?'selected':'' %>>Education</option>
+              <option <%= blog && blog.category==='Technology'?'selected':'' %>>Technology</option>
+              <option <%= blog && blog.category==='Empowerment'?'selected':'' %>>Empowerment</option>
+              <option <%= blog && blog.category==='Events'?'selected':'' %>>Events</option>
+              <option <%= blog && blog.category==='Success Stories'?'selected':'' %>>Success Stories</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Author Name</label>
+            <input type="text" name="author" class="form-control" value="<%= blog ? blog.author : 'She Can Team' %>"/>
+          </div>
+          <div class="form-group">
+            <label>Image URL</label>
+            <input type="url" name="image" class="form-control" value="<%= blog ? blog.image : 'https://picsum.photos/seed/blog'+Date.now()+'/800/400' %>" placeholder="https://..."/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Short Excerpt *</label>
+          <textarea name="excerpt" class="form-control" rows="2" maxlength="300" placeholder="A brief summary shown in blog cards..." required><%= blog ? blog.excerpt : '' %></textarea>
+        </div>
+        <div class="form-group">
+          <label>Full Content * (HTML supported)</label>
+          <textarea name="content" class="form-control" rows="14" placeholder="<p>Write your full blog post here...</p><p>You can use HTML tags.</p>" required><%= blog ? blog.content : '' %></textarea>
+        </div>
+        <div class="form-group" style="display:flex;align-items:center;gap:.8rem">
+          <input type="checkbox" name="published" id="published" <%= blog && blog.published ? 'checked' : '' %> style="width:18px;height:18px;cursor:none"/>
+          <label for="published" style="margin:0;text-transform:none;font-size:.95rem;font-weight:500">Publish immediately</label>
+        </div>
+        <div style="display:flex;gap:1rem">
+          <button type="submit" class="btn-primary"><%= blog ? '✅ Update Post' : '✦ Publish Post' %></button>
+          <a href="/admin/blogs" class="btn-outline">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </main>
+</div>
+
+<%- include('../partials/footer') %>

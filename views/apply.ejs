@@ -1,0 +1,113 @@
+<%- include('partials/header', {title:'Apply for Internship', page:'apply', pageCSS:'main'}) %>
+
+<style>
+.apply-wrap{max-width:800px;margin:0 auto;padding:calc(var(--nav-h)+4rem) 5% 6rem}
+.apply-wrap h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:900;letter-spacing:-.03em;margin-bottom:.5rem}
+.apply-wrap .sub{color:var(--ink2);line-height:1.7;margin-bottom:2.5rem;font-size:1rem}
+.apply-form{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2.5rem;box-shadow:var(--shadow)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.step-indicator{display:flex;gap:.5rem;margin-bottom:2rem}
+.step{flex:1;height:4px;border-radius:2px;background:var(--border)}
+.step.done{background:var(--accent)}
+.info-box{background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.3);border-radius:10px;padding:1rem 1.3rem;margin-bottom:2rem;font-size:.88rem;color:var(--ink2);line-height:1.6}
+.info-box strong{color:var(--gold);display:block;margin-bottom:.3rem}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}}
+</style>
+
+<div class="apply-wrap">
+  <span class="section-label">Internship</span>
+  <h1>Apply Now</h1>
+  <p class="sub">Fill in the form below to apply for an internship at She Can Foundation. We review every application carefully — your effort matters!</p>
+
+  <div class="info-box">
+    <strong>📌 Before You Apply</strong>
+    Duration: 1 Month · Remote / Work From Home · Flexible Timings · Unpaid · Open for Students & Freshers. Benefits: Offer Letter, Completion Certificate, Letter of Recommendation.
+  </div>
+
+  <div class="apply-form reveal">
+    <form action="/apply" method="POST">
+      <div class="step-indicator">
+        <div class="step done"></div>
+        <div class="step done"></div>
+        <div class="step done"></div>
+      </div>
+
+      <h3 style="margin-bottom:1.5rem;font-family:'Playfair Display',serif">Personal Information</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" name="name" class="form-control" placeholder="Your full name" required/>
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" name="email" class="form-control" placeholder="your@email.com" required/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" name="phone" class="form-control" placeholder="+91 XXXXX XXXXX" required/>
+        </div>
+        <div class="form-group">
+          <label>College / University *</label>
+          <input type="text" name="college" class="form-control" placeholder="Your institution" required/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Course / Degree *</label>
+          <input type="text" name="course" class="form-control" placeholder="e.g. B.Tech CSE" required/>
+        </div>
+        <div class="form-group">
+          <label>Year of Study *</label>
+          <select name="year" class="form-control" required>
+            <option value="">Select Year</option>
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>4th Year</option>
+            <option>Fresher / Graduate</option>
+          </select>
+        </div>
+      </div>
+
+      <h3 style="margin:1.5rem 0 1rem;font-family:'Playfair Display',serif">Internship Details</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Internship Role *</label>
+          <select name="role" class="form-control" required>
+            <option value="">Select Role</option>
+            <option>Frontend Development</option>
+            <option>Backend Development</option>
+            <option>UI/UX Design</option>
+            <option>Content Writing</option>
+            <option>Social Media</option>
+            <option>Data Analysis</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Experience Level</label>
+          <select name="experience" class="form-control">
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Portfolio / GitHub Link</label>
+        <input type="url" name="portfolio" class="form-control" placeholder="https://github.com/yourusername"/>
+      </div>
+      <div class="form-group">
+        <label>Why do you want to join She Can Foundation? *</label>
+        <textarea name="motivation" class="form-control" rows="5" maxlength="1000" placeholder="Tell us about your motivation, what you hope to learn, and how you can contribute..." required></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center;font-size:1rem;padding:1rem">
+        ✦ Submit Application
+      </button>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

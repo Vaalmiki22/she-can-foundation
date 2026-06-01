@@ -1,0 +1,63 @@
+<%- include('partials/header', {title:'Programs', page:'programs', pageCSS:'main'}) %>
+
+<style>
+.programs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;max-width:1100px;margin:4rem auto 0;padding:0 5%}
+.program-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.program-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.program-card .p-icon{font-size:2.5rem;margin-bottom:1.2rem}
+.program-card h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:.8rem}
+.program-card p{font-size:.92rem;color:var(--ink2);line-height:1.7;margin-bottom:1.2rem}
+.program-card ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.program-card ul li{font-size:.85rem;color:var(--ink2)}
+.program-card ul li::before{content:'✓ ';color:var(--accent);font-weight:700}
+.program-tag{position:absolute;top:1.5rem;right:1.5rem;background:rgba(192,57,43,.1);color:var(--accent);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:.3rem .7rem;border-radius:100px}
+@media(max-width:700px){.programs-grid{grid-template-columns:1fr}}
+</style>
+
+<div class="page-header">
+  <span class="section-label" style="justify-content:center">What We Do</span>
+  <h1>Our Programs</h1>
+  <p>Practical, community-driven initiatives designed to equip young women with the skills and confidence they need to thrive.</p>
+</div>
+
+<div class="programs-grid">
+  <div class="program-card reveal">
+    <span class="program-tag">Ongoing</span>
+    <div class="p-icon">💻</div>
+    <h3>Digital Literacy Program</h3>
+    <p>Equipping young women with essential digital skills — from basic computer usage to web development, social media, and online safety.</p>
+    <ul><li>Basic to Advanced Computing</li><li>Web Development Fundamentals</li><li>Digital Safety & Privacy</li><li>Online Career Building</li></ul>
+  </div>
+  <div class="program-card reveal">
+    <span class="program-tag">Ongoing</span>
+    <div class="p-icon">🎓</div>
+    <h3>Mentorship Initiative</h3>
+    <p>Connecting young women with experienced professionals and leaders who guide them through their academic and career journeys.</p>
+    <ul><li>1:1 Mentoring Sessions</li><li>Career Guidance</li><li>Skill Assessment & Roadmap</li><li>Industry Networking</li></ul>
+  </div>
+  <div class="program-card reveal">
+    <span class="program-tag">Monthly</span>
+    <div class="p-icon">🛠️</div>
+    <h3>Skill Development Workshops</h3>
+    <p>Hands-on, practical workshops covering in-demand skills that directly improve employability and entrepreneurship prospects.</p>
+    <ul><li>Communication & Leadership</li><li>Graphic Design Basics</li><li>Resume & Interview Prep</li><li>Financial Literacy</li></ul>
+  </div>
+  <div class="program-card reveal">
+    <span class="program-tag">Open</span>
+    <div class="p-icon">🌟</div>
+    <h3>Tech Internship Program</h3>
+    <p>A beginner-friendly, 1-month remote internship program designed to give students real-world experience without unrealistic expectations.</p>
+    <ul><li>Frontend & Backend Development</li><li>UI/UX Design</li><li>Content & Social Media</li><li>Certificate & Recommendation</li></ul>
+  </div>
+</div>
+
+<section class="cta-section" style="margin-top:4rem">
+  <h2 class="reveal">Ready to Get Involved?</h2>
+  <p class="reveal">Apply for our internship or reach out to volunteer and make a difference today.</p>
+  <div class="cta-btns reveal">
+    <a href="/apply" class="btn-primary">✦ Apply Now</a>
+    <a href="/contact" class="btn-outline">Volunteer With Us</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

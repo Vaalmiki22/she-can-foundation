@@ -1,0 +1,51 @@
+<%- include('partials/header', {title:'Blog', page:'blog', pageCSS:'main'}) %>
+
+<style>
+.blog-wrap{max-width:1200px;margin:0 auto;padding:calc(var(--nav-h)+4rem) 5% 6rem}
+.blog-full-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.cat-filters{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.5rem 0}
+.cat-btn{padding:.4rem 1rem;border-radius:100px;border:1.5px solid var(--border);background:var(--surface);font-size:.82rem;font-weight:600;cursor:none;color:var(--ink2);transition:all .2s}
+.cat-btn:hover,.cat-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(192,57,43,.06)}
+.no-posts{text-align:center;padding:4rem;color:var(--ink2)}
+@media(max-width:900px){.blog-full-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.blog-full-grid{grid-template-columns:1fr}}
+</style>
+
+<div class="blog-wrap">
+  <span class="section-label">Stories & Insights</span>
+  <h1 class="section-title">Our Blog</h1>
+  <p class="section-sub">Inspiration, updates, and stories from the She Can community.</p>
+
+  <div class="cat-filters">
+    <a href="/blog" class="cat-btn <%= activeCategory==='All'?'active':'' %>">All</a>
+    <% categories.forEach(cat => { %>
+    <a href="/blog?category=<%= cat %>" class="cat-btn <%= activeCategory===cat?'active':'' %>"><%= cat %></a>
+    <% }) %>
+  </div>
+
+  <% if (blogs.length === 0) { %>
+  <div class="no-posts">
+    <p style="font-size:3rem">📝</p>
+    <p style="margin-top:1rem;font-size:1rem">No blog posts yet. Check back soon!</p>
+  </div>
+  <% } else { %>
+  <div class="blog-full-grid">
+    <% blogs.forEach((b, i) => { %>
+    <div class="blog-card reveal" style="animation-delay:<%= i*0.1 %>s">
+      <img src="<%= b.image %>" alt="<%= b.title %>"/>
+      <div class="blog-card-body">
+        <div class="blog-tag"><%= b.category %></div>
+        <h3><%= b.title %></h3>
+        <p><%= b.excerpt.substring(0,110) %>...</p>
+      </div>
+      <div class="blog-card-footer">
+        <span>👤 <%= b.author %></span>
+        <a href="/blog/<%= b.slug %>">Read More →</a>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

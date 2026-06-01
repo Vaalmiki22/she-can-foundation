@@ -1,0 +1,77 @@
+<%- include('../partials/header', {title:'Applications', pageCSS:'admin'}) %>
+
+<div class="admin-body">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span>She Can Admin</span></div>
+    <ul class="sidebar-menu">
+      <li><a href="/admin">🏠 Dashboard</a></li>
+      <li><a href="/admin/applications" class="active">📋 Applications</a></li>
+      <li><a href="/admin/messages">💬 Messages</a></li>
+      <li><a href="/admin/blogs">📝 Blog Posts</a></li>
+      <li><a href="/admin/blogs/new">✏️ New Post</a></li>
+      <li><a href="/" target="_blank">🌐 View Site</a></li>
+      <li><a href="/admin/logout">🚪 Logout</a></li>
+    </ul>
+  </aside>
+
+  <main class="admin-content">
+    <div class="admin-header">
+      <h1>Applications</h1>
+      <p>Review and manage all internship applications.</p>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <a href="/admin/applications" class="filter-btn <%= !filter.status && !filter.role ? 'active' : '' %>">All</a>
+      <a href="/admin/applications?status=Pending" class="filter-btn <%= filter.status==='Pending'?'active':'' %>">⏳ Pending</a>
+      <a href="/admin/applications?status=Reviewing" class="filter-btn <%= filter.status==='Reviewing'?'active':'' %>">🔍 Reviewing</a>
+      <a href="/admin/applications?status=Accepted" class="filter-btn <%= filter.status==='Accepted'?'active':'' %>">✅ Accepted</a>
+      <a href="/admin/applications?status=Rejected" class="filter-btn <%= filter.status==='Rejected'?'active':'' %>">❌ Rejected</a>
+    </div>
+
+    <div class="admin-table-wrap">
+      <div class="admin-table-header">
+        <h3>All Applications (<%= applications.length %>)</h3>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr><th>Applicant</th><th>Role</th><th>College</th><th>Year</th><th>Status</th><th>Date</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <% if (applications.length === 0) { %>
+          <tr><td colspan="7" style="text-align:center;padding:3rem;color:var(--ink2)">No applications found</td></tr>
+          <% } %>
+          <% applications.forEach(app => { %>
+          <tr>
+            <td>
+              <strong><%= app.name %></strong><br>
+              <small style="color:var(--ink2)"><%= app.email %></small><br>
+              <small style="color:var(--ink2)"><%= app.phone %></small>
+            </td>
+            <td><%= app.role %></td>
+            <td><%= app.college %><br><small style="color:var(--ink2)"><%= app.course %></small></td>
+            <td><%= app.year %></td>
+            <td><span class="status-badge <%= app.status.toLowerCase() %>"><%= app.status %></span></td>
+            <td><%= new Date(app.createdAt).toLocaleDateString('en-IN') %></td>
+            <td>
+              <form action="/admin/applications/<%= app._id %>/status" method="POST" style="display:inline">
+                <select name="status" onchange="this.form.submit()" class="form-control" style="padding:.3rem .5rem;font-size:.78rem;width:110px">
+                  <option <%= app.status==='Pending'?'selected':'' %>>Pending</option>
+                  <option <%= app.status==='Reviewing'?'selected':'' %>>Reviewing</option>
+                  <option <%= app.status==='Accepted'?'selected':'' %>>Accepted</option>
+                  <option <%= app.status==='Rejected'?'selected':'' %>>Rejected</option>
+                </select>
+              </form>
+              <form action="/admin/applications/<%= app._id %>?_method=DELETE" method="POST" style="display:inline;margin-left:.4rem" onsubmit="return confirm('Delete this application?')">
+                <button type="submit" class="btn-sm btn-danger">🗑</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,94 @@
+<%- include('../partials/header', {title:'Admin Dashboard', pageCSS:'admin'}) %>
+
+<div class="admin-body">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span>She Can Admin</span></div>
+    <ul class="sidebar-menu">
+      <li><a href="/admin" class="active">🏠 Dashboard</a></li>
+      <li><a href="/admin/applications">📋 Applications <span class="badge-count"><%= pendingApps %></span></a></li>
+      <li><a href="/admin/messages">💬 Messages <span class="badge-count"><%= unreadContacts %></span></a></li>
+      <li><a href="/admin/blogs">📝 Blog Posts</a></li>
+      <li><a href="/admin/blogs/new">✏️ New Post</a></li>
+      <li style="margin-top:auto"><a href="/" target="_blank">🌐 View Site</a></li>
+      <li><a href="/admin/logout">🚪 Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="admin-content">
+    <div class="admin-header">
+      <h1>Dashboard</h1>
+      <p>Welcome back! Here's what's happening at She Can Foundation.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="s-icon">📋</div>
+        <div class="s-num"><%= totalApps %></div>
+        <div class="s-label">Total Applications</div>
+      </div>
+      <div class="stat-card">
+        <div class="s-icon">⏳</div>
+        <div class="s-num"><%= pendingApps %></div>
+        <div class="s-label">Pending Review</div>
+      </div>
+      <div class="stat-card">
+        <div class="s-icon">💬</div>
+        <div class="s-num"><%= totalContacts %></div>
+        <div class="s-label">Total Messages</div>
+      </div>
+      <div class="stat-card">
+        <div class="s-icon">📝</div>
+        <div class="s-num"><%= totalBlogs %></div>
+        <div class="s-label">Blog Posts</div>
+      </div>
+    </div>
+
+    <!-- Recent Applications -->
+    <div class="admin-table-wrap">
+      <div class="admin-table-header">
+        <h3>Recent Applications</h3>
+        <a href="/admin/applications" class="btn-sm btn-info">View All</a>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Name</th><th>Role</th><th>College</th><th>Status</th><th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (recentApps.length === 0) { %>
+          <tr><td colspan="5" style="text-align:center;color:var(--ink2);padding:2rem">No applications yet</td></tr>
+          <% } %>
+          <% recentApps.forEach(app => { %>
+          <tr>
+            <td><strong><%= app.name %></strong><br><small style="color:var(--ink2)"><%= app.email %></small></td>
+            <td><%= app.role %></td>
+            <td><%= app.college %></td>
+            <td><span class="status-badge <%= app.status.toLowerCase() %>"><%= app.status %></span></td>
+            <td><%= new Date(app.createdAt).toLocaleDateString('en-IN') %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Quick Actions -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.5rem">
+      <a href="/admin/applications" class="card" style="text-decoration:none">
+        <div style="font-size:2rem;margin-bottom:.7rem">📋</div>
+        <h3 style="margin-bottom:.3rem">Manage Applications</h3>
+        <p style="font-size:.85rem;color:var(--ink2)">Review, accept or reject internship applications</p>
+      </a>
+      <a href="/admin/blogs/new" class="card" style="text-decoration:none">
+        <div style="font-size:2rem;margin-bottom:.7rem">✏️</div>
+        <h3 style="margin-bottom:.3rem">Write a Blog Post</h3>
+        <p style="font-size:.85rem;color:var(--ink2)">Share stories, updates and inspiration</p>
+      </a>
+    </div>
+  </main>
+</div>
+
+<%- include('../partials/footer') %>

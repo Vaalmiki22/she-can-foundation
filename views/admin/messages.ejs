@@ -1,0 +1,54 @@
+<%- include('../partials/header', {title:'Messages', pageCSS:'admin'}) %>
+
+<div class="admin-body">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span>She Can Admin</span></div>
+    <ul class="sidebar-menu">
+      <li><a href="/admin">🏠 Dashboard</a></li>
+      <li><a href="/admin/applications">📋 Applications</a></li>
+      <li><a href="/admin/messages" class="active">💬 Messages</a></li>
+      <li><a href="/admin/blogs">📝 Blog Posts</a></li>
+      <li><a href="/admin/blogs/new">✏️ New Post</a></li>
+      <li><a href="/" target="_blank">🌐 View Site</a></li>
+      <li><a href="/admin/logout">🚪 Logout</a></li>
+    </ul>
+  </aside>
+
+  <main class="admin-content">
+    <div class="admin-header">
+      <h1>Messages</h1>
+      <p>Contact form submissions from your website visitors.</p>
+    </div>
+
+    <% if (contacts.length === 0) { %>
+    <div style="text-align:center;padding:4rem;color:var(--ink2)">
+      <div style="font-size:3rem">💬</div>
+      <p style="margin-top:1rem">No messages yet.</p>
+    </div>
+    <% } %>
+
+    <% contacts.forEach(msg => { %>
+    <div class="msg-card <%= msg.read ? '' : 'unread' %>">
+      <div class="msg-meta">
+        <div>
+          <div class="msg-name"><%= msg.name %> <small style="font-weight:400;color:var(--ink2)">— <%= msg.email %></small></div>
+          <div class="msg-subject"><%= msg.subject %></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.8rem">
+          <span class="msg-date"><%= new Date(msg.createdAt).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) %></span>
+          <% if (!msg.read) { %><span style="background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:100px">NEW</span><% } %>
+          <form action="/admin/messages/<%= msg._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete this message?')">
+            <button type="submit" class="btn-sm btn-danger">🗑</button>
+          </form>
+        </div>
+      </div>
+      <div class="msg-body"><%= msg.message %></div>
+      <div style="margin-top:.8rem">
+        <a href="mailto:<%= msg.email %>?subject=Re: <%= msg.subject %>" class="btn-sm btn-info">↩ Reply via Email</a>
+      </div>
+    </div>
+    <% }) %>
+  </main>
+</div>
+
+<%- include('../partials/footer') %>

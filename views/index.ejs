@@ -1,0 +1,103 @@
+<%- include('partials/header', {title:'Home', page:'home', pageCSS:'main'}) %>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow"><span class="dot"></span> Youth-Driven NGO · Est. 2020</div>
+    <h1>Empowering Girls<br>to <em>Rise & Lead</em><br>Together</h1>
+    <p class="hero-sub">She Can Foundation creates opportunities, awareness, and lasting social impact through education, digital initiatives, and community-driven programs.</p>
+    <div class="hero-cta">
+      <a href="/apply" class="btn-primary">✦ Apply for Internship</a>
+      <a href="/about" class="btn-outline">Learn More →</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="img-frame">
+      <img src="https://picsum.photos/seed/shecanhero/800/1000" alt="Young women empowered"/>
+    </div>
+    <div class="badge"><strong>500+</strong>Lives Impacted</div>
+    <div class="tag-float">Est. 2020</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-item"><span class="stat-num">500+</span><span class="stat-label">Lives Impacted</span></div>
+  <div class="stat-item"><span class="stat-num">12+</span><span class="stat-label">Programs Running</span></div>
+  <div class="stat-item"><span class="stat-num">30+</span><span class="stat-label">Volunteers</span></div>
+  <div class="stat-item"><span class="stat-num">8</span><span class="stat-label">States Reached</span></div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section">
+  <div class="reveal-left">
+    <span class="section-label">About Us</span>
+    <h2 class="section-title">Who We Are &amp; What We Stand For</h2>
+    <p class="section-sub">She Can Foundation is a youth-driven NGO dedicated to creating a world where every young woman has the tools, confidence, and community to pursue her dreams — regardless of her background.</p>
+    <p class="section-sub" style="margin-top:1rem">We run digital literacy programs, mentorship initiatives, and skill-development workshops that prepare young women for the modern world.</p>
+    <div class="about-cards">
+      <div class="about-card"><div class="icon">🎓</div><h4>Education First</h4><p>Practical skills & workshops that open real doors.</p></div>
+      <div class="about-card"><div class="icon">💻</div><h4>Digital Inclusion</h4><p>Tech training that bridges the gender digital divide.</p></div>
+      <div class="about-card"><div class="icon">🤝</div><h4>Community</h4><p>A supportive network that grows together.</p></div>
+      <div class="about-card"><div class="icon">🌱</div><h4>Sustainability</h4><p>Programs built for long-term, lasting change.</p></div>
+    </div>
+  </div>
+  <div class="about-img-wrap reveal-right">
+    <img src="https://picsum.photos/seed/shecanabout/700/900" alt="Women collaborating"/>
+    <div class="accent-ring"></div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission-section">
+  <span class="section-label reveal" style="justify-content:center">Our Core Values</span>
+  <h2 class="section-title reveal">Built on Belief, Driven by Purpose</h2>
+  <p class="section-sub reveal" style="margin:0 auto">Three principles guide every program, every decision, and every girl we work with.</p>
+  <div class="values-grid">
+    <div class="value-card reveal"><div class="v-icon">⚡</div><h3>Empowerment</h3><p>We stand beside every young woman as she discovers her own strength and potential.</p></div>
+    <div class="value-card reveal"><div class="v-icon">🌍</div><h3>Inclusivity</h3><p>Talent knows no background. Our doors are open to everyone, everywhere.</p></div>
+    <div class="value-card reveal"><div class="v-icon">🔥</div><h3>Action</h3><p>We turn awareness into tangible programs, measurable outcomes, and real opportunities.</p></div>
+  </div>
+</section>
+
+<!-- BLOG PREVIEW -->
+<% if (blogs && blogs.length > 0) { %>
+<section class="blog-preview">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem">
+    <div>
+      <span class="section-label">Latest Stories</span>
+      <h2 class="section-title">From Our Blog</h2>
+    </div>
+    <a href="/blog" class="btn-outline">View All →</a>
+  </div>
+  <div class="blog-grid">
+    <% blogs.forEach(b => { %>
+    <div class="blog-card reveal">
+      <img src="<%= b.image %>" alt="<%= b.title %>"/>
+      <div class="blog-card-body">
+        <div class="blog-tag"><%= b.category %></div>
+        <h3><%= b.title %></h3>
+        <p><%= b.excerpt.substring(0,100) %>...</p>
+      </div>
+      <div class="blog-card-footer">
+        <span><%= b.author %></span>
+        <a href="/blog/<%= b.slug %>">Read →</a>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</section>
+<% } %>
+
+<!-- CTA -->
+<section class="cta-section">
+  <span class="section-label reveal" style="justify-content:center">Join Us</span>
+  <h2 class="reveal">Ready to Be Part of the Change?</h2>
+  <p class="reveal">Whether you want to intern, volunteer, or spread the word — there's a place for you in the She Can community.</p>
+  <div class="cta-btns reveal">
+    <a href="/apply" class="btn-primary">✦ Apply for Internship</a>
+    <a href="/contact" class="btn-outline">Contact Us</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

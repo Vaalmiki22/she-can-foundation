@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin Login | She Can Foundation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/admin.css"/>
+</head>
+<body>
+<div id="cursor"></div>
+<div class="admin-login-wrap">
+  <div class="login-card reveal">
+    <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;margin-bottom:1.5rem">She<span style="color:var(--accent)">Can</span> Admin</div>
+    <h1>Welcome Back</h1>
+    <p>Sign in to manage the She Can Foundation dashboard.</p>
+    <% if (error && error.length > 0) { %>
+    <div style="background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.3);border-radius:8px;padding:.8rem 1rem;color:var(--accent);font-size:.88rem;margin-bottom:1.2rem"><%= error %></div>
+    <% } %>
+    <form action="/admin/login" method="POST">
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" name="email" class="form-control" placeholder="admin@shecan.org" required/>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="password" class="form-control" placeholder="••••••••" required/>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:.5rem">Sign In →</button>
+    </form>
+    <p style="text-align:center;margin-top:1.5rem;font-size:.82rem;color:var(--ink2)">Default: admin@shecan.org / admin123</p>
+    <p style="text-align:center;margin-top:.5rem"><a href="/" style="color:var(--accent);font-size:.85rem">← Back to Website</a></p>
+  </div>
+</div>
+<script src="/js/main.js"></script>
+</body></html>

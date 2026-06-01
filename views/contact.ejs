@@ -1,0 +1,63 @@
+<%- include('partials/header', {title:'Contact Us', page:'contact', pageCSS:'main'}) %>
+
+<style>
+.contact-wrap{max-width:1100px;margin:0 auto;padding:calc(var(--nav-h)+4rem) 5% 6rem;display:grid;grid-template-columns:1fr 1.6fr;gap:4rem;align-items:start}
+.contact-info h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-.03em;margin-bottom:1rem}
+.contact-info p{color:var(--ink2);line-height:1.75;margin-bottom:2rem}
+.contact-item{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;padding:1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:12px}
+.contact-item .c-icon{font-size:1.4rem;flex-shrink:0}
+.contact-item h4{font-size:.88rem;font-weight:700;margin-bottom:.2rem}
+.contact-item p{font-size:.85rem;color:var(--ink2);margin:0}
+.contact-form{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2.5rem;box-shadow:var(--shadow)}
+.contact-form h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;margin-bottom:1.5rem}
+@media(max-width:900px){.contact-wrap{grid-template-columns:1fr;gap:2.5rem}}
+</style>
+
+<div class="contact-wrap">
+  <div class="contact-info reveal-left">
+    <span class="section-label">Get In Touch</span>
+    <h1>We'd Love to Hear From You</h1>
+    <p>Have questions, suggestions, or want to collaborate? Reach out to us — we typically respond within 24 hours.</p>
+    <div class="contact-item">
+      <div class="c-icon">📧</div>
+      <div><h4>Email Us</h4><p>hello@shecandoundation.org</p></div>
+    </div>
+    <div class="contact-item">
+      <div class="c-icon">📸</div>
+      <div><h4>Instagram</h4><p>@shecandoundation</p></div>
+    </div>
+    <div class="contact-item">
+      <div class="c-icon">💼</div>
+      <div><h4>LinkedIn</h4><p>She Can Foundation</p></div>
+    </div>
+    <div class="contact-item">
+      <div class="c-icon">🕐</div>
+      <div><h4>Response Time</h4><p>Within 24 hours</p></div>
+    </div>
+  </div>
+
+  <div class="contact-form reveal-right">
+    <h2>Send Us a Message</h2>
+    <form action="/contact" method="POST">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" name="name" class="form-control" placeholder="Full name" required/>
+      </div>
+      <div class="form-group">
+        <label>Email Address *</label>
+        <input type="email" name="email" class="form-control" placeholder="your@email.com" required/>
+      </div>
+      <div class="form-group">
+        <label>Subject *</label>
+        <input type="text" name="subject" class="form-control" placeholder="What is this regarding?" required/>
+      </div>
+      <div class="form-group">
+        <label>Message *</label>
+        <textarea name="message" class="form-control" rows="6" maxlength="1000" placeholder="Write your message here..." required></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center">✦ Send Message</button>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

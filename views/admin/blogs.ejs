@@ -1,0 +1,55 @@
+<%- include('../partials/header', {title:'Blog Posts', pageCSS:'admin'}) %>
+
+<div class="admin-body">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span>She Can Admin</span></div>
+    <ul class="sidebar-menu">
+      <li><a href="/admin">🏠 Dashboard</a></li>
+      <li><a href="/admin/applications">📋 Applications</a></li>
+      <li><a href="/admin/messages">💬 Messages</a></li>
+      <li><a href="/admin/blogs" class="active">📝 Blog Posts</a></li>
+      <li><a href="/admin/blogs/new">✏️ New Post</a></li>
+      <li><a href="/" target="_blank">🌐 View Site</a></li>
+      <li><a href="/admin/logout">🚪 Logout</a></li>
+    </ul>
+  </aside>
+
+  <main class="admin-content">
+    <div class="admin-header" style="display:flex;justify-content:space-between;align-items:center">
+      <div><h1>Blog Posts</h1><p>Create and manage blog content.</p></div>
+      <a href="/admin/blogs/new" class="btn-primary">✏️ New Post</a>
+    </div>
+
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr><th>Title</th><th>Category</th><th>Author</th><th>Views</th><th>Status</th><th>Date</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <% if (blogs.length === 0) { %>
+          <tr><td colspan="7" style="text-align:center;padding:3rem;color:var(--ink2)">No blog posts yet. <a href="/admin/blogs/new" style="color:var(--accent)">Create one!</a></td></tr>
+          <% } %>
+          <% blogs.forEach(b => { %>
+          <tr>
+            <td><strong><%= b.title.substring(0,40) %><%= b.title.length>40?'...':'' %></strong></td>
+            <td><%= b.category %></td>
+            <td><%= b.author %></td>
+            <td>👁 <%= b.views %></td>
+            <td><span class="status-badge <%= b.published ? 'accepted' : 'rejected' %>"><%= b.published ? 'Published' : 'Draft' %></span></td>
+            <td><%= new Date(b.createdAt).toLocaleDateString('en-IN') %></td>
+            <td style="display:flex;gap:.4rem;flex-wrap:wrap">
+              <a href="/blog/<%= b.slug %>" target="_blank" class="btn-sm btn-info">👁</a>
+              <a href="/admin/blogs/<%= b._id %>/edit" class="btn-sm btn-success">✏️</a>
+              <form action="/admin/blogs/<%= b._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete this post?')">
+                <button type="submit" class="btn-sm btn-danger">🗑</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<%- include('../partials/footer') %>
